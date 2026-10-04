@@ -147,6 +147,39 @@
       background:#d9c49b;
     }
 
+    .mode-switch small{
+      display:block;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(255,255,255,.35);
+      padding:0 14px 8px;
+    }
+    .mode-options{
+      display:flex;
+      gap:4px;
+      padding:4px;
+      border-radius:12px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .mode-options button{
+      flex:1;
+      border:0;
+      background:transparent;
+      color:rgba(255,255,255,.68);
+      padding:8px 10px;
+      border-radius:9px;
+      font-size:12px;
+      transition:.2s;
+    }
+    .mode-options button:hover,
+    .mode-options button.active{
+      background:rgba(255,255,255,.1);
+      color:#fff;
+    }
+    .mode-hidden{display:none !important}
+
     .main{
       min-width:0;
       padding:26px;
@@ -554,6 +587,14 @@
       <button data-page="settings" data-text="nav.settings"></button>
     </nav>
 
+    <div class="mode-switch">
+      <small data-text="setupMode.label"></small>
+      <div class="mode-options">
+        <button data-mode="layer" data-text="setupMode.layer"></button>
+        <button data-mode="full" data-text="setupMode.full"></button>
+      </div>
+    </div>
+
     <div class="sidebar-bottom">
       <small data-text="sidebarStat.label"></small>
       <strong data-text="sidebarStat.value"></strong>
@@ -570,7 +611,7 @@
         </div>
         <div class="top-actions">
           <button class="btn" data-text="buttons.export"></button>
-          <button class="btn primary" onclick="openNewBooking()" data-text="buttons.newBooking"></button>
+          <button class="btn primary" onclick="openNewBooking()" data-needs-page="bookings" data-text="buttons.newBooking"></button>
         </div>
       </div>
 
@@ -804,6 +845,12 @@
 </div>
 
 <script>
+  /* ===== SETUP MODE — which version of the product to show. Edit here. ===== */
+  // 'layer' = the lodge already has its own system. Hides Bookings, Invoices and Reports.
+  // 'full'  = the lodge has no system. Shows everything.
+  // This is what the page opens in. The switch in the sidebar changes it while you look.
+  const SETUP_MODE = 'layer';
+
   /* ===== CONTENT — all wording lives here. Edit here. ===== */
   // Change the words between the quote marks. Keep the quote marks and the commas.
   // Status colours can be 'green', 'yellow', 'red' or 'gray'.
@@ -827,6 +874,12 @@
       automations: 'Automations',
       reports: 'Reports',
       settings: 'Settings',
+    },
+
+    setupMode: {
+      label: 'Setup mode',
+      layer: 'Layer',
+      full: 'Full',
     },
 
     sidebarStat: {
@@ -1275,7 +1328,37 @@
   const navButtons = document.querySelectorAll('.nav button[data-page]');
   const pages = document.querySelectorAll('.page');
 
+  // Pages each setup mode hides. Nothing new is built; existing screens are only shown or hidden.
+  const MODE_HIDDEN_PAGES = {
+    layer: ['bookings', 'invoices', 'reports'],
+    full: [],
+  };
+  let currentMode = SETUP_MODE;
+
+  function isHidden(pageId){
+    return (MODE_HIDDEN_PAGES[currentMode] || []).includes(pageId);
+  }
+
+  function applyMode(mode){
+    currentMode = mode;
+    navButtons.forEach(b => b.classList.toggle('mode-hidden', isHidden(b.dataset.page)));
+    pages.forEach(p => p.classList.toggle('mode-hidden', isHidden(p.id)));
+    document.querySelectorAll('[data-needs-page]').forEach(el => {
+      el.classList.toggle('mode-hidden', isHidden(el.dataset.needsPage));
+    });
+    document.querySelectorAll('.mode-options button').forEach(b => {
+      b.classList.toggle('active', b.dataset.mode === mode);
+    });
+    const current = document.querySelector('.page.active');
+    if(current && isHidden(current.id)) showPage('dashboard');
+  }
+
+  document.querySelectorAll('.mode-options button').forEach(btn => {
+    btn.addEventListener('click', () => applyMode(btn.dataset.mode));
+  });
+
   function showPage(id){
+    if(isHidden(id)) return;
     pages.forEach(p => p.classList.remove('active'));
     navButtons.forEach(b => b.classList.remove('active'));
     const page = document.getElementById(id);
@@ -1288,6 +1371,8 @@
   navButtons.forEach(btn => {
     btn.addEventListener('click', () => showPage(btn.dataset.page));
   });
+
+  applyMode(SETUP_MODE);
 
   function openNewBooking(){
     showPage('bookings');
