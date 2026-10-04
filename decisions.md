@@ -11,7 +11,7 @@ The first four entries were made before this repo existed. They are dated the da
 
 V1 handles guest enquiries: reading them, drafting replies and checking availability.
 It does not replace the lodge's booking system.
-**Reason:** most lodges already run a property management system. The enquiry inbox is where they lose the most time.
+**Reason:** most lodges already run a property management system. The enquiry inbox is where they lose the most time. *(Reason drafted at setup — please confirm or correct.)*
 
 ## 2026-10-04 — One product with two setup modes
 
