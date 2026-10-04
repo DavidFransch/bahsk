@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SafariFlow AI — Reservations Platform</title>
   <style>
+    /* ===== DESIGN TOKENS — colours, type, spacing. Edit here. ===== */
     :root{
       --bg:#f4f0e8;
       --panel:#fffdf8;
@@ -534,28 +535,28 @@
     <div class="brand">
       <div class="brand-mark">✦</div>
       <div class="brand-copy">
-        <strong>SafariFlow AI</strong>
-        <span>Reservations Intelligence</span>
+        <strong data-text="brand.name"></strong>
+        <span data-text="brand.tagline"></span>
       </div>
     </div>
 
     <nav class="nav">
-      <div class="label">Workspace</div>
-      <button class="active" data-page="dashboard">Dashboard</button>
-      <button data-page="inbox">AI Inbox</button>
-      <button data-page="availability">Availability</button>
-      <button data-page="bookings">Bookings</button>
-      <button data-page="invoices">Invoices</button>
-      <button data-page="knowledge">Knowledge Base</button>
-      <div class="label">Management</div>
-      <button data-page="automations">Automations</button>
-      <button data-page="reports">Reports</button>
-      <button data-page="settings">Settings</button>
+      <div class="label" data-text="nav.workspaceLabel"></div>
+      <button class="active" data-page="dashboard" data-text="nav.dashboard"></button>
+      <button data-page="inbox" data-text="nav.inbox"></button>
+      <button data-page="availability" data-text="nav.availability"></button>
+      <button data-page="bookings" data-text="nav.bookings"></button>
+      <button data-page="invoices" data-text="nav.invoices"></button>
+      <button data-page="knowledge" data-text="nav.knowledge"></button>
+      <div class="label" data-text="nav.managementLabel"></div>
+      <button data-page="automations" data-text="nav.automations"></button>
+      <button data-page="reports" data-text="nav.reports"></button>
+      <button data-page="settings" data-text="nav.settings"></button>
     </nav>
 
     <div class="sidebar-bottom">
-      <small>AI handled this month</small>
-      <strong>68% of enquiries</strong>
+      <small data-text="sidebarStat.label"></small>
+      <strong data-text="sidebarStat.value"></strong>
       <div class="usage-bar"><div></div></div>
     </div>
   </aside>
@@ -564,146 +565,52 @@
     <section id="dashboard" class="page active">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Olifants River Lodge</div>
-          <h1>Good morning, Reservations.</h1>
+          <div class="eyebrow" data-demo="lodge.name"></div>
+          <h1 data-text="dashboard.greeting"></h1>
         </div>
         <div class="top-actions">
-          <button class="btn">Export</button>
-          <button class="btn primary" onclick="openNewBooking()">+ New booking</button>
+          <button class="btn" data-text="buttons.export"></button>
+          <button class="btn primary" onclick="openNewBooking()" data-text="buttons.newBooking"></button>
         </div>
       </div>
 
-      <div class="grid metrics">
-        <div class="card metric">
-          <div class="label">New Enquiries</div>
-          <div class="value">12</div>
-          <div class="trend">+4 since yesterday</div>
-        </div>
-        <div class="card metric">
-          <div class="label">Provisional</div>
-          <div class="value">8</div>
-          <div class="trend">3 need attention</div>
-        </div>
-        <div class="card metric">
-          <div class="label">Expiring Today</div>
-          <div class="value">3</div>
-          <div class="trend">R126k potential</div>
-        </div>
-        <div class="card metric">
-          <div class="label">Outstanding</div>
-          <div class="value">5</div>
-          <div class="trend">Invoices unpaid</div>
-        </div>
-        <div class="card metric">
-          <div class="label">Arrivals</div>
-          <div class="value">14</div>
-          <div class="trend">This week</div>
-        </div>
-        <div class="card metric">
-          <div class="label">Occupancy</div>
-          <div class="value">82%</div>
-          <div class="trend">Next 30 days</div>
-        </div>
-      </div>
+      <div class="grid metrics" id="dashboard-metrics"></div>
 
       <div class="grid main-grid">
         <div class="grid">
           <div class="card section">
             <div class="section-head">
               <div>
-                <div class="eyebrow">Booking pipeline</div>
-                <h2>Reservations overview</h2>
-                <p>Track enquiries from first contact to confirmed stay.</p>
+                <div class="eyebrow" data-text="dashboard.pipeline.eyebrow"></div>
+                <h2 data-text="dashboard.pipeline.title"></h2>
+                <p data-text="dashboard.pipeline.intro"></p>
               </div>
             </div>
-            <div class="pipeline">
-              <div class="pipe"><span>New</span><b>12</b></div>
-              <div class="pipe"><span>Quoted</span><b>9</b></div>
-              <div class="pipe"><span>Provisional</span><b>8</b></div>
-              <div class="pipe"><span>Payment</span><b>5</b></div>
-              <div class="pipe"><span>Confirmed</span><b>21</b></div>
-            </div>
+            <div class="pipeline" id="dashboard-pipeline"></div>
           </div>
 
           <div class="card section">
             <div class="section-head">
               <div>
-                <div class="eyebrow">AI Inbox</div>
-                <h2>Recent enquiries</h2>
+                <div class="eyebrow" data-text="dashboard.recentEnquiries.eyebrow"></div>
+                <h2 data-text="dashboard.recentEnquiries.title"></h2>
               </div>
-              <button class="btn" onclick="showPage('inbox')">View inbox</button>
+              <button class="btn" onclick="showPage('inbox')" data-text="buttons.viewInbox"></button>
             </div>
 
-            <div class="inbox-list">
-              <div class="inbox-item">
-                <div>
-                  <strong>Sarah Williams · Safari Travel Co.</strong>
-                  <div class="inbox-meta">2 guests · 14–17 Oct 2026 · Luxury Suite<br>AI found matching availability and rates.</div>
-                </div>
-                <span class="status green">High confidence</span>
-              </div>
-
-              <div class="inbox-item">
-                <div>
-                  <strong>Daniel Meyer · Private guest</strong>
-                  <div class="inbox-meta">Family of 5 · 3 children · 20–24 Dec 2026<br>Child policy requires human approval.</div>
-                </div>
-                <span class="status yellow">Review</span>
-              </div>
-
-              <div class="inbox-item">
-                <div>
-                  <strong>Amara Travel</strong>
-                  <div class="inbox-meta">8 guests · Private use request · 11–15 Nov 2026<br>Group rate requested.</div>
-                </div>
-                <span class="status red">Escalate</span>
-              </div>
-            </div>
+            <div class="inbox-list" id="dashboard-enquiries"></div>
           </div>
 
           <div class="card section">
             <div class="section-head">
               <div>
-                <div class="eyebrow">Availability</div>
-                <h2>Next 4 nights</h2>
+                <div class="eyebrow" data-text="dashboard.availabilityPreview.eyebrow"></div>
+                <h2 data-text="dashboard.availabilityPreview.title"></h2>
               </div>
-              <button class="btn" onclick="showPage('availability')">Full calendar</button>
+              <button class="btn" onclick="showPage('availability')" data-text="buttons.fullCalendar"></button>
             </div>
             <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Room</th>
-                    <th>14 Oct</th>
-                    <th>15 Oct</th>
-                    <th>16 Oct</th>
-                    <th>17 Oct</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Luxury Suite 1</td>
-                    <td class="availability-cell available">Available</td>
-                    <td class="availability-cell available">Available</td>
-                    <td class="availability-cell provisional">Provisional</td>
-                    <td class="availability-cell confirmed">Confirmed</td>
-                  </tr>
-                  <tr>
-                    <td>Luxury Suite 2</td>
-                    <td class="availability-cell available">Available</td>
-                    <td class="availability-cell provisional">Provisional</td>
-                    <td class="availability-cell provisional">Provisional</td>
-                    <td class="availability-cell confirmed">Confirmed</td>
-                  </tr>
-                  <tr>
-                    <td>River Villa</td>
-                    <td class="availability-cell confirmed">Confirmed</td>
-                    <td class="availability-cell confirmed">Confirmed</td>
-                    <td class="availability-cell available">Available</td>
-                    <td class="availability-cell available">Available</td>
-                  </tr>
-                </tbody>
-              </table>
+              <table id="dashboard-availability"></table>
             </div>
           </div>
         </div>
@@ -712,46 +619,28 @@
           <div class="card section">
             <div class="section-head">
               <div>
-                <div class="eyebrow">Attention required</div>
-                <h2>3 tasks</h2>
+                <div class="eyebrow" data-text="dashboard.attention.eyebrow"></div>
+                <h2 data-text="dashboard.attention.title"></h2>
               </div>
             </div>
-            <div class="attention">
-              <div class="attention-item">
-                <strong>Provisional #SAF-10245 expires today</strong>
-                <p>R42,500 deposit still outstanding.</p>
-              </div>
-              <div class="attention-item">
-                <strong>Child policy question</strong>
-                <p>AI needs approval before replying to Daniel Meyer.</p>
-              </div>
-              <div class="attention-item">
-                <strong>Group rate requested</strong>
-                <p>8 guests requesting private-use pricing.</p>
-              </div>
-            </div>
+            <div class="attention" id="dashboard-attention"></div>
           </div>
 
           <div class="ai-box">
-            <div class="eyebrow" style="color:rgba(255,255,255,.5)">AI Reservations Assistant</div>
-            <h2>43 enquiries handled automatically.</h2>
-            <p>I have drafted responses, checked live availability, created provisional holds and sent expiry reminders. Four conversations need your review.</p>
-            <button class="btn" onclick="showPage('inbox')">Review conversations</button>
+            <div class="eyebrow" style="color:rgba(255,255,255,.5)" data-text="dashboard.assistant.eyebrow"></div>
+            <h2 data-text="dashboard.assistant.title"></h2>
+            <p data-text="dashboard.assistant.body"></p>
+            <button class="btn" onclick="showPage('inbox')" data-text="buttons.reviewConversations"></button>
           </div>
 
           <div class="card section">
             <div class="section-head">
               <div>
-                <div class="eyebrow">Knowledge base</div>
-                <h2>Popular answers</h2>
+                <div class="eyebrow" data-text="dashboard.popularAnswers.eyebrow"></div>
+                <h2 data-text="dashboard.popularAnswers.title"></h2>
               </div>
             </div>
-            <div class="knowledge">
-              <div class="tile"><b>Transfers</b><span>Airport & road transfer information</span></div>
-              <div class="tile"><b>Child Policy</b><span>Ages, rooming and safari rules</span></div>
-              <div class="tile"><b>Game Drives</b><span>Times, inclusions and restrictions</span></div>
-              <div class="tile"><b>Payments</b><span>Deposit & cancellation terms</span></div>
-            </div>
+            <div class="knowledge" id="dashboard-answers"></div>
           </div>
         </div>
       </div>
@@ -760,56 +649,32 @@
     <section id="inbox" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">AI Inbox</div>
-          <h1>Enquiries & conversations</h1>
+          <div class="eyebrow" data-text="inbox.eyebrow"></div>
+          <h1 data-text="inbox.title"></h1>
         </div>
-        <button class="btn primary">Connect inbox</button>
+        <button class="btn primary" data-text="buttons.connectInbox"></button>
       </div>
       <div class="page-grid">
         <div class="card section">
-          <input class="searchbar" placeholder="Search guests, agents or booking references..." />
-          <div class="inbox-list">
-            <div class="inbox-item">
-              <div>
-                <strong>Sarah Williams · Safari Travel Co.</strong>
-                <div class="inbox-meta">2 guests · 14–17 Oct · Luxury Suite<br>"Do you have availability for our guests?"</div>
-                <div class="mini-actions">
-                  <button class="btn primary" onclick="demoToast('Provisional booking created')">Approve & Send</button>
-                  <button class="btn">Edit</button>
-                  <button class="btn">Assign</button>
-                </div>
-              </div>
-              <span class="status green">High confidence</span>
-            </div>
-            <div class="inbox-item">
-              <div>
-                <strong>Daniel Meyer</strong>
-                <div class="inbox-meta">Family of 5 · 20–24 Dec<br>"Can our 4-year-old join game drives?"</div>
-                <div class="mini-actions">
-                  <button class="btn">Review draft</button>
-                  <button class="btn">Assign</button>
-                </div>
-              </div>
-              <span class="status yellow">Medium confidence</span>
-            </div>
-          </div>
+          <input class="searchbar" data-placeholder="inbox.searchPlaceholder" />
+          <div class="inbox-list" id="inbox-enquiries"></div>
         </div>
 
         <div class="card section">
           <div class="section-head">
             <div>
-              <div class="eyebrow">Conversation preview</div>
-              <h2>AI-assisted response</h2>
+              <div class="eyebrow" data-text="inbox.preview.eyebrow"></div>
+              <h2 data-text="inbox.preview.title"></h2>
             </div>
           </div>
           <div class="chat">
-            <div class="msg user">Hi, we'd like to book a luxury safari for 2 adults from 14–17 October. Do you have availability?</div>
-            <div class="msg ai">We are pleased to confirm availability for 2 guests from 14–17 October 2026 in a Luxury Suite. The current rate is R12,500 per night. I can place this on a 14-day provisional hold.</div>
+            <div class="msg user" data-text="inbox.preview.guestMessage"></div>
+            <div class="msg ai" data-text="inbox.preview.draftReply"></div>
           </div>
           <div class="mini-actions">
-            <button class="btn primary">Send</button>
-            <button class="btn">Edit</button>
-            <button class="btn">Regenerate</button>
+            <button class="btn primary" data-text="buttons.send"></button>
+            <button class="btn" data-text="buttons.edit"></button>
+            <button class="btn" data-text="buttons.regenerate"></button>
           </div>
         </div>
       </div>
@@ -818,41 +683,20 @@
     <section id="availability" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Live inventory</div>
-          <h1>Availability calendar</h1>
+          <div class="eyebrow" data-text="availability.eyebrow"></div>
+          <h1 data-text="availability.title"></h1>
         </div>
-        <button class="btn primary">+ Block dates</button>
+        <button class="btn primary" data-text="buttons.blockDates"></button>
       </div>
       <div class="card section">
         <div class="section-head">
           <div>
-            <h2>October 2026</h2>
-            <p>Green = available · Yellow = provisional · Red = confirmed · Grey = closed</p>
+            <h2 data-demo="availability.month"></h2>
+            <p data-text="availability.legend"></p>
           </div>
         </div>
         <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Room</th>
-                <th>14 Oct</th><th>15 Oct</th><th>16 Oct</th><th>17 Oct</th><th>18 Oct</th><th>19 Oct</th><th>20 Oct</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Luxury Suite 1</td>
-                <td class="availability-cell available">A</td><td class="availability-cell available">A</td><td class="availability-cell provisional">P</td><td class="availability-cell confirmed">C</td><td class="availability-cell confirmed">C</td><td class="availability-cell available">A</td><td class="availability-cell available">A</td>
-              </tr>
-              <tr>
-                <td>Luxury Suite 2</td>
-                <td class="availability-cell available">A</td><td class="availability-cell provisional">P</td><td class="availability-cell provisional">P</td><td class="availability-cell confirmed">C</td><td class="availability-cell available">A</td><td class="availability-cell available">A</td><td class="availability-cell closed">X</td>
-              </tr>
-              <tr>
-                <td>River Villa</td>
-                <td class="availability-cell confirmed">C</td><td class="availability-cell confirmed">C</td><td class="availability-cell available">A</td><td class="availability-cell available">A</td><td class="availability-cell available">A</td><td class="availability-cell provisional">P</td><td class="availability-cell provisional">P</td>
-              </tr>
-            </tbody>
-          </table>
+          <table id="availability-calendar"></table>
         </div>
       </div>
     </section>
@@ -860,68 +704,28 @@
     <section id="bookings" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Reservations</div>
-          <h1>Bookings</h1>
+          <div class="eyebrow" data-text="bookings.eyebrow"></div>
+          <h1 data-text="bookings.title"></h1>
         </div>
-        <button class="btn primary" onclick="openNewBooking()">+ New booking</button>
+        <button class="btn primary" onclick="openNewBooking()" data-text="buttons.newBooking"></button>
       </div>
 
-      <div class="card section">
-        <input class="searchbar" placeholder="Search bookings..." />
-        <div class="booking-card">
-          <div class="booking-top">
-            <div>
-              <div class="eyebrow">#SAF-10245</div>
-              <h3>Sarah Williams</h3>
-            </div>
-            <span class="status yellow">Provisional</span>
-          </div>
-          <div class="booking-info">
-            <div><span>Arrival</span><b>14 Oct 2026</b></div>
-            <div><span>Departure</span><b>17 Oct 2026</b></div>
-            <div><span>Room</span><b>Luxury Suite 1</b></div>
-            <div><span>Total</span><b>R37,500</b></div>
-          </div>
-        </div>
-
-        <div class="booking-card">
-          <div class="booking-top">
-            <div>
-              <div class="eyebrow">#SAF-10239</div>
-              <h3>James & Olivia Hart</h3>
-            </div>
-            <span class="status green">Confirmed</span>
-          </div>
-          <div class="booking-info">
-            <div><span>Arrival</span><b>18 Oct 2026</b></div>
-            <div><span>Departure</span><b>22 Oct 2026</b></div>
-            <div><span>Room</span><b>River Villa</b></div>
-            <div><span>Total</span><b>R96,000</b></div>
-          </div>
-        </div>
+      <div class="card section" id="bookings-list">
+        <input class="searchbar" data-placeholder="bookings.searchPlaceholder" />
       </div>
     </section>
 
     <section id="invoices" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Finance</div>
-          <h1>Invoices & payments</h1>
+          <div class="eyebrow" data-text="invoices.eyebrow"></div>
+          <h1 data-text="invoices.title"></h1>
         </div>
-        <button class="btn primary">+ Create invoice</button>
+        <button class="btn primary" data-text="buttons.createInvoice"></button>
       </div>
       <div class="card section">
         <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Invoice</th><th>Guest</th><th>Total</th><th>Paid</th><th>Due</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>INV-2045</td><td>Sarah Williams</td><td>R37,500</td><td>R0</td><td>28 Sep 2026</td><td><span class="status yellow">Sent</span></td></tr>
-              <tr><td>INV-2040</td><td>James Hart</td><td>R96,000</td><td>R96,000</td><td>10 Sep 2026</td><td><span class="status green">Paid</span></td></tr>
-              <tr><td>INV-2037</td><td>Amara Travel</td><td>R126,000</td><td>R50,000</td><td>15 Sep 2026</td><td><span class="status yellow">Partially paid</span></td></tr>
-            </tbody>
-          </table>
+          <table id="invoices-table"></table>
         </div>
       </div>
     </section>
@@ -929,29 +733,22 @@
     <section id="knowledge" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">AI Knowledge Base</div>
-          <h1>Teach the AI about your lodge</h1>
+          <div class="eyebrow" data-text="knowledge.eyebrow"></div>
+          <h1 data-text="knowledge.title"></h1>
         </div>
-        <button class="btn primary">+ Add information</button>
+        <button class="btn primary" data-text="buttons.addInformation"></button>
       </div>
       <div class="page-grid">
         <div class="card section">
-          <div class="knowledge">
-            <div class="tile"><b>Accommodation</b><span>8 articles</span></div>
-            <div class="tile"><b>Rates</b><span>12 rate rules</span></div>
-            <div class="tile"><b>Activities</b><span>6 articles</span></div>
-            <div class="tile"><b>Transfers</b><span>5 articles</span></div>
-            <div class="tile"><b>Child Policy</b><span>4 articles</span></div>
-            <div class="tile"><b>Payments</b><span>7 policy entries</span></div>
-          </div>
+          <div class="knowledge" id="knowledge-topics"></div>
         </div>
         <div class="card section">
           <div class="section-head">
-            <div><h2>Ask your AI</h2><p>Test answers before they are sent to guests.</p></div>
+            <div><h2 data-text="knowledge.test.title"></h2><p data-text="knowledge.test.intro"></p></div>
           </div>
           <div class="chat">
-            <div class="msg user">Can children under six join game drives?</div>
-            <div class="msg ai">Children under six may join private game drives at the guide's discretion. Shared drives are generally restricted to older children. Please confirm the exact booking before sending.</div>
+            <div class="msg user" data-text="knowledge.test.question"></div>
+            <div class="msg ai" data-text="knowledge.test.answer"></div>
           </div>
         </div>
       </div>
@@ -960,66 +757,46 @@
     <section id="automations" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Automation engine</div>
-          <h1>Reservation flows</h1>
+          <div class="eyebrow" data-text="automations.eyebrow"></div>
+          <h1 data-text="automations.title"></h1>
         </div>
-        <button class="btn primary">+ New automation</button>
+        <button class="btn primary" data-text="buttons.newAutomation"></button>
       </div>
-      <div class="card section">
-        <div class="booking-card">
-          <div class="booking-top">
-            <div><h3>14-day provisional flow</h3><div class="inbox-meta">Day 0 → hold created · Day 7 → reminder · Day 12 → expiry warning · Day 13 → final warning · Day 14 → release dates</div></div>
-            <span class="status green">Active</span>
-          </div>
-        </div>
-        <div class="booking-card">
-          <div class="booking-top">
-            <div><h3>Confirmed booking pre-arrival</h3><div class="inbox-meta">30 days → guest details · 14 days → transfers · 7 days → packing guide · 1 day → welcome</div></div>
-            <span class="status green">Active</span>
-          </div>
-        </div>
-      </div>
+      <div class="card section" id="automations-list"></div>
     </section>
 
     <section id="reports" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Reporting</div>
-          <h1>Performance</h1>
+          <div class="eyebrow" data-text="reports.eyebrow"></div>
+          <h1 data-text="reports.title"></h1>
         </div>
-        <button class="btn">Export report</button>
+        <button class="btn" data-text="buttons.exportReport"></button>
       </div>
-      <div class="grid metrics">
-        <div class="card metric"><div class="label">Conversion rate</div><div class="value">31%</div><div class="trend">+6% this month</div></div>
-        <div class="card metric"><div class="label">Avg response</div><div class="value">2m</div><div class="trend">AI-assisted</div></div>
-        <div class="card metric"><div class="label">Revenue</div><div class="value">R1.2m</div><div class="trend">This month</div></div>
-        <div class="card metric"><div class="label">Expired holds</div><div class="value">17</div><div class="trend">21% of provisional</div></div>
-        <div class="card metric"><div class="label">AI handled</div><div class="value">68%</div><div class="trend">Enquiries</div></div>
-        <div class="card metric"><div class="label">Occupancy</div><div class="value">82%</div><div class="trend">Next 30 days</div></div>
-      </div>
+      <div class="grid metrics" id="reports-metrics"></div>
     </section>
 
     <section id="settings" class="page">
       <div class="topbar">
         <div>
-          <div class="eyebrow">Admin</div>
-          <h1>Settings</h1>
+          <div class="eyebrow" data-text="settings.eyebrow"></div>
+          <h1 data-text="settings.title"></h1>
         </div>
-        <button class="btn primary" onclick="demoToast('Settings saved')">Save changes</button>
+        <button class="btn primary" onclick="demoToast(CONTENT.toasts.settingsSaved)" data-text="buttons.saveChanges"></button>
       </div>
       <div class="page-grid">
         <div class="card section">
-          <div class="section-head"><div><h2>Lodge details</h2></div></div>
+          <div class="section-head"><div><h2 data-text="settings.lodgeDetails.title"></h2></div></div>
           <div class="form-grid">
-            <div class="form-group"><label>Lodge name</label><input value="Olifants River Lodge"></div>
-            <div class="form-group"><label>Reservations email</label><input value="reservations@olifantsriver.example"></div>
-            <div class="form-group"><label>Default provisional period</label><select><option>14 days</option><option>7 days</option><option>21 days</option></select></div>
-            <div class="form-group"><label>Deposit required</label><input value="50%"></div>
+            <div class="form-group"><label data-text="settings.lodgeDetails.lodgeName"></label><input data-demo-value="lodge.name"></div>
+            <div class="form-group"><label data-text="settings.lodgeDetails.reservationsEmail"></label><input data-demo-value="lodge.email"></div>
+            <div class="form-group"><label data-text="settings.lodgeDetails.provisionalPeriod"></label><select id="settings-provisional"></select></div>
+            <div class="form-group"><label data-text="settings.lodgeDetails.depositRequired"></label><input data-demo-value="settings.deposit"></div>
           </div>
         </div>
         <div class="card section">
-          <div class="section-head"><div><h2>AI behaviour</h2></div></div>
-          <div class="form-group"><label>Tone of voice</label><textarea>Warm, premium, knowledgeable and concise. Never invent rates, availability or policies. Escalate uncertain requests to reservations staff.</textarea></div>
+          <div class="section-head"><div><h2 data-text="settings.aiBehaviour.title"></h2></div></div>
+          <div class="form-group"><label data-text="settings.aiBehaviour.toneLabel"></label><textarea data-value="settings.aiBehaviour.tone"></textarea></div>
         </div>
       </div>
     </section>
@@ -1027,6 +804,474 @@
 </div>
 
 <script>
+  /* ===== CONTENT — all wording lives here. Edit here. ===== */
+  // Change the words between the quote marks. Keep the quote marks and the commas.
+  // Status colours can be 'green', 'yellow', 'red' or 'gray'.
+  const CONTENT = {
+    pageTitle: 'SafariFlow AI — Reservations Platform',
+
+    brand: {
+      name: 'SafariFlow AI',
+      tagline: 'Reservations Intelligence',
+    },
+
+    nav: {
+      workspaceLabel: 'Workspace',
+      dashboard: 'Dashboard',
+      inbox: 'AI Inbox',
+      availability: 'Availability',
+      bookings: 'Bookings',
+      invoices: 'Invoices',
+      knowledge: 'Knowledge Base',
+      managementLabel: 'Management',
+      automations: 'Automations',
+      reports: 'Reports',
+      settings: 'Settings',
+    },
+
+    sidebarStat: {
+      label: 'AI handled this month',
+      value: '68% of enquiries',
+    },
+
+    buttons: {
+      export: 'Export',
+      newBooking: '+ New booking',
+      viewInbox: 'View inbox',
+      fullCalendar: 'Full calendar',
+      reviewConversations: 'Review conversations',
+      connectInbox: 'Connect inbox',
+      send: 'Send',
+      edit: 'Edit',
+      regenerate: 'Regenerate',
+      blockDates: '+ Block dates',
+      createInvoice: '+ Create invoice',
+      addInformation: '+ Add information',
+      newAutomation: '+ New automation',
+      exportReport: 'Export report',
+      saveChanges: 'Save changes',
+    },
+
+    // Small pop-up messages that appear bottom-right
+    toasts: {
+      newBooking: 'New booking form would open here',
+      settingsSaved: 'Settings saved',
+    },
+
+    dashboard: {
+      greeting: 'Good morning, Reservations.',
+      metricLabels: {
+        newEnquiries: 'New Enquiries',
+        provisional: 'Provisional',
+        expiringToday: 'Expiring Today',
+        outstanding: 'Outstanding',
+        arrivals: 'Arrivals',
+        occupancy: 'Occupancy',
+      },
+      pipeline: {
+        eyebrow: 'Booking pipeline',
+        title: 'Reservations overview',
+        intro: 'Track enquiries from first contact to confirmed stay.',
+        stages: {
+          new: 'New',
+          quoted: 'Quoted',
+          provisional: 'Provisional',
+          payment: 'Payment',
+          confirmed: 'Confirmed',
+        },
+      },
+      recentEnquiries: {
+        eyebrow: 'AI Inbox',
+        title: 'Recent enquiries',
+        // Enquiry examples shown on the dashboard
+        items: [
+          {
+            name: 'Sarah Williams · Safari Travel Co.',
+            details: '2 guests · 14–17 Oct 2026 · Luxury Suite',
+            note: 'AI found matching availability and rates.',
+            status: { text: 'High confidence', colour: 'green' },
+          },
+          {
+            name: 'Daniel Meyer · Private guest',
+            details: 'Family of 5 · 3 children · 20–24 Dec 2026',
+            note: 'Child policy requires human approval.',
+            status: { text: 'Review', colour: 'yellow' },
+          },
+          {
+            name: 'Amara Travel',
+            details: '8 guests · Private use request · 11–15 Nov 2026',
+            note: 'Group rate requested.',
+            status: { text: 'Escalate', colour: 'red' },
+          },
+        ],
+      },
+      availabilityPreview: {
+        eyebrow: 'Availability',
+        title: 'Next 4 nights',
+      },
+      attention: {
+        eyebrow: 'Attention required',
+        title: '3 tasks',
+        items: [
+          { title: 'Provisional #SAF-10245 expires today', detail: 'R42,500 deposit still outstanding.' },
+          { title: 'Child policy question', detail: 'AI needs approval before replying to Daniel Meyer.' },
+          { title: 'Group rate requested', detail: '8 guests requesting private-use pricing.' },
+        ],
+      },
+      assistant: {
+        eyebrow: 'AI Reservations Assistant',
+        title: '43 enquiries handled automatically.',
+        body: 'I have drafted responses, checked live availability, created provisional holds and sent expiry reminders. Four conversations need your review.',
+      },
+      popularAnswers: {
+        eyebrow: 'Knowledge base',
+        title: 'Popular answers',
+        tiles: [
+          { title: 'Transfers', text: 'Airport & road transfer information' },
+          { title: 'Child Policy', text: 'Ages, rooming and safari rules' },
+          { title: 'Game Drives', text: 'Times, inclusions and restrictions' },
+          { title: 'Payments', text: 'Deposit & cancellation terms' },
+        ],
+      },
+    },
+
+    inbox: {
+      eyebrow: 'AI Inbox',
+      title: 'Enquiries & conversations',
+      searchPlaceholder: 'Search guests, agents or booking references...',
+      // Enquiry examples shown in the AI Inbox.
+      // A button with a "toast" shows that message when clicked.
+      enquiries: [
+        {
+          name: 'Sarah Williams · Safari Travel Co.',
+          details: '2 guests · 14–17 Oct · Luxury Suite',
+          message: '"Do you have availability for our guests?"',
+          status: { text: 'High confidence', colour: 'green' },
+          buttons: [
+            { label: 'Approve & Send', primary: true, toast: 'Provisional booking created' },
+            { label: 'Edit' },
+            { label: 'Assign' },
+          ],
+        },
+        {
+          name: 'Daniel Meyer',
+          details: 'Family of 5 · 20–24 Dec',
+          message: '"Can our 4-year-old join game drives?"',
+          status: { text: 'Medium confidence', colour: 'yellow' },
+          buttons: [
+            { label: 'Review draft' },
+            { label: 'Assign' },
+          ],
+        },
+      ],
+      // Source of truth for these two: content/templates.md
+      preview: {
+        eyebrow: 'Conversation preview',
+        title: 'AI-assisted response',
+        guestMessage: "Hi, we'd like to book a luxury safari for 2 adults from 14–17 October. Do you have availability?",
+        draftReply: 'We are pleased to confirm availability for 2 guests from 14–17 October 2026 in a Luxury Suite. The current rate is R12,500 per night. I can place this on a 14-day provisional hold.',
+      },
+    },
+
+    availability: {
+      eyebrow: 'Live inventory',
+      title: 'Availability calendar',
+      legend: 'Green = available · Yellow = provisional · Red = confirmed · Grey = closed',
+      roomColumn: 'Room',
+      // Words used in the dashboard's "Next 4 nights" table
+      cellLabels: { available: 'Available', provisional: 'Provisional', confirmed: 'Confirmed', closed: 'Closed' },
+      // Letters used in the full calendar
+      cellLetters: { available: 'A', provisional: 'P', confirmed: 'C', closed: 'X' },
+    },
+
+    bookings: {
+      eyebrow: 'Reservations',
+      title: 'Bookings',
+      searchPlaceholder: 'Search bookings...',
+      fieldLabels: { arrival: 'Arrival', departure: 'Departure', room: 'Room', total: 'Total' },
+    },
+
+    invoices: {
+      eyebrow: 'Finance',
+      title: 'Invoices & payments',
+      columns: ['Invoice', 'Guest', 'Total', 'Paid', 'Due', 'Status'],
+    },
+
+    knowledge: {
+      eyebrow: 'AI Knowledge Base',
+      title: 'Teach the AI about your lodge',
+      topics: [
+        { title: 'Accommodation', text: '8 articles' },
+        { title: 'Rates', text: '12 rate rules' },
+        { title: 'Activities', text: '6 articles' },
+        { title: 'Transfers', text: '5 articles' },
+        { title: 'Child Policy', text: '4 articles' },
+        { title: 'Payments', text: '7 policy entries' },
+      ],
+      // Source of truth: content/faq.md
+      test: {
+        title: 'Ask your AI',
+        intro: 'Test answers before they are sent to guests.',
+        question: 'Can children under six join game drives?',
+        answer: "Children under six may join private game drives at the guide's discretion. Shared drives are generally restricted to older children. Please confirm the exact booking before sending.",
+      },
+    },
+
+    automations: {
+      eyebrow: 'Automation engine',
+      title: 'Reservation flows',
+      // Source of truth: content/templates.md
+      flows: [
+        {
+          name: '14-day provisional flow',
+          steps: 'Day 0 → hold created · Day 7 → reminder · Day 12 → expiry warning · Day 13 → final warning · Day 14 → release dates',
+          status: { text: 'Active', colour: 'green' },
+        },
+        {
+          name: 'Confirmed booking pre-arrival',
+          steps: '30 days → guest details · 14 days → transfers · 7 days → packing guide · 1 day → welcome',
+          status: { text: 'Active', colour: 'green' },
+        },
+      ],
+    },
+
+    reports: {
+      eyebrow: 'Reporting',
+      title: 'Performance',
+      metricLabels: {
+        conversionRate: 'Conversion rate',
+        avgResponse: 'Avg response',
+        revenue: 'Revenue',
+        expiredHolds: 'Expired holds',
+        aiHandled: 'AI handled',
+        occupancy: 'Occupancy',
+      },
+    },
+
+    settings: {
+      eyebrow: 'Admin',
+      title: 'Settings',
+      lodgeDetails: {
+        title: 'Lodge details',
+        lodgeName: 'Lodge name',
+        reservationsEmail: 'Reservations email',
+        provisionalPeriod: 'Default provisional period',
+        depositRequired: 'Deposit required',
+      },
+      aiBehaviour: {
+        title: 'AI behaviour',
+        toneLabel: 'Tone of voice',
+        tone: 'Warm, premium, knowledgeable and concise. Never invent rates, availability or policies. Escalate uncertain requests to reservations staff.',
+      },
+    },
+  };
+
+  /* ===== DEMO DATA — fake lodges, bookings, numbers ===== */
+  // None of this is real. It only fills the screens so the prototype looks alive.
+  const DEMO_DATA = {
+    lodge: {
+      name: 'Olifants River Lodge',
+      email: 'reservations@olifantsriver.example',
+    },
+
+    // Big numbers on the dashboard. Labels live in CONTENT.dashboard.metricLabels.
+    dashboardMetrics: {
+      newEnquiries: { value: '12', trend: '+4 since yesterday' },
+      provisional: { value: '8', trend: '3 need attention' },
+      expiringToday: { value: '3', trend: 'R126k potential' },
+      outstanding: { value: '5', trend: 'Invoices unpaid' },
+      arrivals: { value: '14', trend: 'This week' },
+      occupancy: { value: '82%', trend: 'Next 30 days' },
+    },
+
+    pipeline: { new: 12, quoted: 9, provisional: 8, payment: 5, confirmed: 21 },
+
+    // Each night is 'available', 'provisional', 'confirmed' or 'closed'.
+    // The dashboard shows the first 4 nights; the calendar shows all of them.
+    availability: {
+      month: 'October 2026',
+      dates: ['14 Oct', '15 Oct', '16 Oct', '17 Oct', '18 Oct', '19 Oct', '20 Oct'],
+      rooms: [
+        { room: 'Luxury Suite 1', nights: ['available', 'available', 'provisional', 'confirmed', 'confirmed', 'available', 'available'] },
+        { room: 'Luxury Suite 2', nights: ['available', 'provisional', 'provisional', 'confirmed', 'available', 'available', 'closed'] },
+        { room: 'River Villa', nights: ['confirmed', 'confirmed', 'available', 'available', 'available', 'provisional', 'provisional'] },
+      ],
+    },
+
+    bookings: [
+      { ref: '#SAF-10245', guest: 'Sarah Williams', status: { text: 'Provisional', colour: 'yellow' }, arrival: '14 Oct 2026', departure: '17 Oct 2026', room: 'Luxury Suite 1', total: 'R37,500' },
+      { ref: '#SAF-10239', guest: 'James & Olivia Hart', status: { text: 'Confirmed', colour: 'green' }, arrival: '18 Oct 2026', departure: '22 Oct 2026', room: 'River Villa', total: 'R96,000' },
+    ],
+
+    invoices: [
+      { invoice: 'INV-2045', guest: 'Sarah Williams', total: 'R37,500', paid: 'R0', due: '28 Sep 2026', status: { text: 'Sent', colour: 'yellow' } },
+      { invoice: 'INV-2040', guest: 'James Hart', total: 'R96,000', paid: 'R96,000', due: '10 Sep 2026', status: { text: 'Paid', colour: 'green' } },
+      { invoice: 'INV-2037', guest: 'Amara Travel', total: 'R126,000', paid: 'R50,000', due: '15 Sep 2026', status: { text: 'Partially paid', colour: 'yellow' } },
+    ],
+
+    // Report numbers. Labels live in CONTENT.reports.metricLabels.
+    reportMetrics: {
+      conversionRate: { value: '31%', trend: '+6% this month' },
+      avgResponse: { value: '2m', trend: 'AI-assisted' },
+      revenue: { value: 'R1.2m', trend: 'This month' },
+      expiredHolds: { value: '17', trend: '21% of provisional' },
+      aiHandled: { value: '68%', trend: 'Enquiries' },
+      occupancy: { value: '82%', trend: 'Next 30 days' },
+    },
+
+    settings: {
+      provisionalPeriods: ['14 days', '7 days', '21 days'],
+      deposit: '50%',
+    },
+  };
+
+  /* ===== Below here is code. You should not need to edit it to change wording. ===== */
+
+  function esc(value){
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function lookup(source, path){
+    return path.split('.').reduce((obj, key) => obj == null ? undefined : obj[key], source);
+  }
+
+  function statusPill(status){
+    return `<span class="status ${esc(status.colour)}">${esc(status.text)}</span>`;
+  }
+
+  function metricCards(labels, values){
+    return Object.keys(labels).map(key => `
+        <div class="card metric">
+          <div class="label">${esc(labels[key])}</div>
+          <div class="value">${esc(values[key].value)}</div>
+          <div class="trend">${esc(values[key].trend)}</div>
+        </div>`).join('');
+  }
+
+  function availabilityTable(nightCount, cellText){
+    const a = DEMO_DATA.availability;
+    const dates = a.dates.slice(0, nightCount);
+    return `
+      <thead>
+        <tr><th>${esc(CONTENT.availability.roomColumn)}</th>${dates.map(d => `<th>${esc(d)}</th>`).join('')}</tr>
+      </thead>
+      <tbody>
+        ${a.rooms.map(r => `
+        <tr>
+          <td>${esc(r.room)}</td>${r.nights.slice(0, nightCount).map(n => `<td class="availability-cell ${esc(n)}">${esc(cellText[n])}</td>`).join('')}
+        </tr>`).join('')}
+      </tbody>`;
+  }
+
+  function tiles(items){
+    return items.map(t => `<div class="tile"><b>${esc(t.title)}</b><span>${esc(t.text)}</span></div>`).join('');
+  }
+
+  function render(){
+    document.title = CONTENT.pageTitle;
+
+    document.querySelectorAll('[data-text]').forEach(el => { el.textContent = lookup(CONTENT, el.dataset.text); });
+    document.querySelectorAll('[data-demo]').forEach(el => { el.textContent = lookup(DEMO_DATA, el.dataset.demo); });
+    document.querySelectorAll('[data-placeholder]').forEach(el => { el.placeholder = lookup(CONTENT, el.dataset.placeholder); });
+    document.querySelectorAll('[data-value]').forEach(el => { el.value = lookup(CONTENT, el.dataset.value); });
+    document.querySelectorAll('[data-demo-value]').forEach(el => { el.value = lookup(DEMO_DATA, el.dataset.demoValue); });
+
+    const d = CONTENT.dashboard;
+
+    document.getElementById('dashboard-metrics').innerHTML =
+      metricCards(d.metricLabels, DEMO_DATA.dashboardMetrics);
+
+    document.getElementById('dashboard-pipeline').innerHTML = Object.keys(d.pipeline.stages).map(key =>
+      `<div class="pipe"><span>${esc(d.pipeline.stages[key])}</span><b>${esc(DEMO_DATA.pipeline[key])}</b></div>`).join('');
+
+    document.getElementById('dashboard-enquiries').innerHTML = d.recentEnquiries.items.map(e => `
+      <div class="inbox-item">
+        <div>
+          <strong>${esc(e.name)}</strong>
+          <div class="inbox-meta">${esc(e.details)}<br>${esc(e.note)}</div>
+        </div>
+        ${statusPill(e.status)}
+      </div>`).join('');
+
+    document.getElementById('dashboard-availability').innerHTML =
+      availabilityTable(4, CONTENT.availability.cellLabels);
+
+    document.getElementById('dashboard-attention').innerHTML = d.attention.items.map(a => `
+      <div class="attention-item">
+        <strong>${esc(a.title)}</strong>
+        <p>${esc(a.detail)}</p>
+      </div>`).join('');
+
+    document.getElementById('dashboard-answers').innerHTML = tiles(d.popularAnswers.tiles);
+
+    const inboxList = document.getElementById('inbox-enquiries');
+    inboxList.innerHTML = CONTENT.inbox.enquiries.map(e => `
+      <div class="inbox-item">
+        <div>
+          <strong>${esc(e.name)}</strong>
+          <div class="inbox-meta">${esc(e.details)}<br>${esc(e.message)}</div>
+          <div class="mini-actions">
+            ${e.buttons.map(b => `<button class="btn${b.primary ? ' primary' : ''}"${b.toast ? ` data-toast="${esc(b.toast)}"` : ''}>${esc(b.label)}</button>`).join('')}
+          </div>
+        </div>
+        ${statusPill(e.status)}
+      </div>`).join('');
+    inboxList.querySelectorAll('[data-toast]').forEach(btn => {
+      btn.addEventListener('click', () => demoToast(btn.dataset.toast));
+    });
+
+    document.getElementById('availability-calendar').innerHTML =
+      availabilityTable(DEMO_DATA.availability.dates.length, CONTENT.availability.cellLetters);
+
+    const f = CONTENT.bookings.fieldLabels;
+    document.getElementById('bookings-list').insertAdjacentHTML('beforeend', DEMO_DATA.bookings.map(b => `
+      <div class="booking-card">
+        <div class="booking-top">
+          <div>
+            <div class="eyebrow">${esc(b.ref)}</div>
+            <h3>${esc(b.guest)}</h3>
+          </div>
+          ${statusPill(b.status)}
+        </div>
+        <div class="booking-info">
+          <div><span>${esc(f.arrival)}</span><b>${esc(b.arrival)}</b></div>
+          <div><span>${esc(f.departure)}</span><b>${esc(b.departure)}</b></div>
+          <div><span>${esc(f.room)}</span><b>${esc(b.room)}</b></div>
+          <div><span>${esc(f.total)}</span><b>${esc(b.total)}</b></div>
+        </div>
+      </div>`).join(''));
+
+    document.getElementById('invoices-table').innerHTML = `
+      <thead>
+        <tr>${CONTENT.invoices.columns.map(c => `<th>${esc(c)}</th>`).join('')}</tr>
+      </thead>
+      <tbody>
+        ${DEMO_DATA.invoices.map(i => `<tr><td>${esc(i.invoice)}</td><td>${esc(i.guest)}</td><td>${esc(i.total)}</td><td>${esc(i.paid)}</td><td>${esc(i.due)}</td><td>${statusPill(i.status)}</td></tr>`).join('')}
+      </tbody>`;
+
+    document.getElementById('knowledge-topics').innerHTML = tiles(CONTENT.knowledge.topics);
+
+    document.getElementById('automations-list').innerHTML = CONTENT.automations.flows.map(a => `
+      <div class="booking-card">
+        <div class="booking-top">
+          <div><h3>${esc(a.name)}</h3><div class="inbox-meta">${esc(a.steps)}</div></div>
+          ${statusPill(a.status)}
+        </div>
+      </div>`).join('');
+
+    document.getElementById('reports-metrics').innerHTML =
+      metricCards(CONTENT.reports.metricLabels, DEMO_DATA.reportMetrics);
+
+    document.getElementById('settings-provisional').innerHTML =
+      DEMO_DATA.settings.provisionalPeriods.map(p => `<option>${esc(p)}</option>`).join('');
+  }
+
+  render();
+
   const navButtons = document.querySelectorAll('.nav button[data-page]');
   const pages = document.querySelectorAll('.page');
 
@@ -1046,7 +1291,7 @@
 
   function openNewBooking(){
     showPage('bookings');
-    demoToast('New booking form would open here');
+    demoToast(CONTENT.toasts.newBooking);
   }
 
   function demoToast(message){
