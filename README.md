@@ -101,4 +101,5 @@ Tell David. Any earlier version can be brought back.
 ## About the live site
 
 The online link uses GitHub Pages.
-Pages on a private repository needs a paid GitHub plan (Pro, Team or Enterprise).
+For now this repository is public, so anyone with the link can see it. Pages is free for public repositories.
+If we make it private later, Pages will need a paid GitHub plan (Pro, Team or Enterprise).
